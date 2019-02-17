@@ -60,12 +60,22 @@ namespace MySecondMonoGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            //Player Updates
             player.shipUpdate(gameTime, gameController);
             gameController.conUpdate(gameTime);
 
             for (int i = 0; i < gameController.asteroids.Count; i++)
             {
                 gameController.asteroids[i].asteroidUpdate(gameTime);
+
+                int sum = gameController.asteroids[i].radius + 30;
+                if (Vector2.Distance(gameController.asteroids[i].position, player.position) < sum)
+                {
+                    gameController.inGame = false;
+                    player.position = Ship.defauldPosition;
+                    i = gameController.asteroids.Count;
+                    gameController.asteroids.Clear();
+                }
             }
 
             base.Update(gameTime);
