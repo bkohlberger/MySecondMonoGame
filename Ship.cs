@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 
@@ -13,38 +6,38 @@ namespace MySecondMonoGame
 {
     class Ship
     {
-        public int speed = 180;
-        static public Vector2 defauldPosition = new Vector2(640, 360);
-        public Vector2 position = defauldPosition;
+        public int Speed = 200;
+        static public Vector2 DefaultPosition = new Vector2(640, 360);
+        public Vector2 Position = DefaultPosition;
 
-        public void shipUpdate(GameTime gameTime, Controller gamController)
+        public void ShipUpdate(GameTime gameTime, Controller gamController)
         {
             KeyboardState kState = Keyboard.GetState();
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
 
-            if (gamController.inGame)
+            if (gamController.InGame)
             {
-                if (kState.IsKeyDown(Keys.D))
+                if (kState.IsKeyDown(Keys.D) && Position.X < 1280 - 40)
                 {
-                    position.X += speed * dt;
+                    Position.X += Speed * dt;
                 }
 
-                if (kState.IsKeyDown(Keys.A))
+                if (kState.IsKeyDown(Keys.A) && Position.X > 30)
                 {
                     ;
-                    position.X -= speed * dt;
+                    Position.X -= Speed * dt;
                 }
 
-                if (kState.IsKeyDown(Keys.S))
+                if (kState.IsKeyDown(Keys.S) && Position.Y < 720 - 40)
                 {
-                    position.Y += speed * dt;
+                    Position.Y += Speed * dt;
                 }
 
-                if (kState.IsKeyDown(Keys.W))
+                if (kState.IsKeyDown(Keys.W) && Position.Y > 40)
                 {
-                    position.Y -= speed * dt;
+                    Position.Y -= Speed * dt;
                 }
             }
         }

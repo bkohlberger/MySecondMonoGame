@@ -1,51 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace MySecondMonoGame
 {
     class Controller
     {
-        public List<Asteroid> asteroids = new List<Asteroid>();
-        public double timer = 2D;
-        public double maxTime = 2D;
-        public int nextSpeed = 240;
+        public List<Asteroid> Asteroids = new List<Asteroid>();
+        public double Timer = 2D;
+        public double MaxTime = 2D;
+        public int NextSpeed = 240;
+        public float TotalTime = 0f;
 
-        public bool inGame = false;
+        public bool InGame = false;
 
-        public void conUpdate(GameTime gameTime)
+        public void ConUpdate(GameTime gameTime)
         {
-            if (inGame)
+            if (InGame)
             {
-                timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                Timer -= gameTime.ElapsedGameTime.TotalSeconds;
+                TotalTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
             }
             else
             {
                 KeyboardState kState = Keyboard.GetState();
                 if (kState.IsKeyDown(Keys.Enter))
                 {
-                    inGame = true;
+                    InGame = true;
+                    TotalTime = 0f;
+                    Timer = 2D;
+                    MaxTime = 2D;
+                    NextSpeed = 240;
                 }
             }
 
-            if (timer <= 0)
+            if (Timer <= 0)
             {
-                asteroids.Add(new Asteroid(nextSpeed));
-                timer = maxTime;
-                if (maxTime > 0.5)
+                Asteroids.Add(new Asteroid(NextSpeed));
+                Timer = MaxTime;
+                if (MaxTime > 0.5)
                 {
-                    maxTime -= 0.1D;
+                    MaxTime -= 0.1D;
                 }
 
-                if (nextSpeed < 720)
+                if (NextSpeed < 720)
                 {
-                    nextSpeed += 4;
+                    NextSpeed += 4;
                 }
             }
         }
