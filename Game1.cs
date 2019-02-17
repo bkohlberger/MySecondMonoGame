@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Reflection;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -17,8 +18,10 @@ namespace MySecondMonoGame
 
         private SpriteFont gameFont;
         private SpriteFont timerFont;
-
+        
         Ship player = new Ship();
+
+        Asteroid testAsteroid = new Asteroid(250);
 
         public Game1()
         {
@@ -60,6 +63,7 @@ namespace MySecondMonoGame
                 Exit();
 
             player.shipUpdate(gameTime);
+            testAsteroid.asteroidUpdate(gameTime);
             
             base.Update(gameTime);
         }
@@ -72,6 +76,8 @@ namespace MySecondMonoGame
 
             spriteBatch.Draw(space_Sprite, new Vector2(0,0), Color.White);
             spriteBatch.Draw(ship_Sprite, new Vector2(player.position.X - 34, player.position.Y - 50), Color.White);
+
+            spriteBatch.Draw(asteroid_Sprite, new Vector2(testAsteroid.position.X - testAsteroid.radius, testAsteroid.position.Y - testAsteroid.radius), Color.White);
 
             spriteBatch.End();
 
