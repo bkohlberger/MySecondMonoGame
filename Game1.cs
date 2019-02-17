@@ -11,7 +11,6 @@ namespace MySecondMonoGame
         SpriteBatch spriteBatch;
 
         //External Content
-
         private Texture2D ship_Sprite;
         private Texture2D asteroid_Sprite;
         private Texture2D space_Sprite;
@@ -19,8 +18,9 @@ namespace MySecondMonoGame
         private SpriteFont gameFont;
         private SpriteFont timerFont;
         
-        Ship player = new Ship();
 
+        //Player Objects
+        Ship player = new Ship();
         Controller gameController = new Controller();
 
         public Game1()
@@ -34,16 +34,14 @@ namespace MySecondMonoGame
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
-
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //Load Game Graphics
             ship_Sprite = Content.Load<Texture2D>("ship");
             asteroid_Sprite = Content.Load<Texture2D>("asteroid");
             space_Sprite = Content.Load<Texture2D>("space");
@@ -62,7 +60,7 @@ namespace MySecondMonoGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            player.shipUpdate(gameTime);
+            player.shipUpdate(gameTime, gameController);
             gameController.conUpdate(gameTime);
 
             for (int i = 0; i < gameController.asteroids.Count; i++)
@@ -90,6 +88,12 @@ namespace MySecondMonoGame
                 spriteBatch.Draw(asteroid_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
 
+            if (gameController.inGame == false)
+            {
+                string menuMessage = "Press Enter to Begin!\n\nUse WSAD keys to move your ship\n\nPress ESC to Exit!";
+                Vector2 sizeOfText = gameFont.MeasureString(menuMessage);
+                spriteBatch.DrawString(gameFont, menuMessage, new Vector2(640 - sizeOfText.X/2, 200), Color.Yellow);
+            }
 
             spriteBatch.End();
 

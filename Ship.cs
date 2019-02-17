@@ -13,35 +13,39 @@ namespace MySecondMonoGame
 {
     class Ship
     {
-        public Vector2 position = new Vector2(100, 100);
-
         public int speed = 180;
+        static public Vector2 defauldPosition = new Vector2(640, 360);
+        public Vector2 position = defauldPosition;
 
-        public void shipUpdate(GameTime gameTime)
+        public void shipUpdate(GameTime gameTime, Controller gamController)
         {
             KeyboardState kState = Keyboard.GetState();
 
             float dt = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (kState.IsKeyDown(Keys.Right))
-            {
-                position.X += speed * dt;
-            }
 
-            if (kState.IsKeyDown(Keys.Left))
+            if (gamController.inGame)
             {
-;
-                position.X -= speed * dt;
-            }
+                if (kState.IsKeyDown(Keys.D))
+                {
+                    position.X += speed * dt;
+                }
 
-            if (kState.IsKeyDown(Keys.Down))
-            {
-                position.Y += speed * dt;
-            }
+                if (kState.IsKeyDown(Keys.A))
+                {
+                    ;
+                    position.X -= speed * dt;
+                }
 
-            if (kState.IsKeyDown(Keys.Up))
-            {
-                position.Y -= speed * dt;
+                if (kState.IsKeyDown(Keys.S))
+                {
+                    position.Y += speed * dt;
+                }
+
+                if (kState.IsKeyDown(Keys.W))
+                {
+                    position.Y -= speed * dt;
+                }
             }
         }
     }
