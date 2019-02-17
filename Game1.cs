@@ -21,7 +21,7 @@ namespace MySecondMonoGame
         
         Ship player = new Ship();
 
-        Asteroid testAsteroid = new Asteroid(250);
+        Controller gameController = new Controller();
 
         public Game1()
         {
@@ -63,8 +63,13 @@ namespace MySecondMonoGame
                 Exit();
 
             player.shipUpdate(gameTime);
-            testAsteroid.asteroidUpdate(gameTime);
-            
+            gameController.conUpdate(gameTime);
+
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                gameController.asteroids[i].asteroidUpdate(gameTime);
+            }
+
             base.Update(gameTime);
         }
 
@@ -77,7 +82,13 @@ namespace MySecondMonoGame
             spriteBatch.Draw(space_Sprite, new Vector2(0,0), Color.White);
             spriteBatch.Draw(ship_Sprite, new Vector2(player.position.X - 34, player.position.Y - 50), Color.White);
 
-            spriteBatch.Draw(asteroid_Sprite, new Vector2(testAsteroid.position.X - testAsteroid.radius, testAsteroid.position.Y - testAsteroid.radius), Color.White);
+            for (int i = 0; i < gameController.asteroids.Count; i++)
+            {
+                Vector2 tempPos = gameController.asteroids[i].position;
+                int tempRadius = gameController.asteroids[i].radius;
+                spriteBatch.Draw(asteroid_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
+            }
+
 
             spriteBatch.End();
 
