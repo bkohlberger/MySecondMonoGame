@@ -12,13 +12,17 @@ namespace MySecondMonoGame
 {
     class Asteroid
     {
-        public Vector2 position = new Vector2(600, 300);
+        public Vector2 position;
         public int speed;
         public int radius = 59;
+
+        static Random rand = new Random();
 
         public Asteroid(int newSpeed)
         {
             speed = newSpeed;
+
+            position = new Vector2(1280 + radius, rand.Next(0, 721));
         }
 
         public void asteroidUpdate(GameTime gameTime)

@@ -86,6 +86,7 @@ namespace MySecondMonoGame
             {
                 Vector2 tempPos = gameController.asteroids[i].position;
                 int tempRadius = gameController.asteroids[i].radius;
+
                 spriteBatch.Draw(asteroid_Sprite, new Vector2(tempPos.X - tempRadius, tempPos.Y - tempRadius), Color.White);
             }
 
