@@ -14,7 +14,7 @@ namespace MySecondMonoGame
         [STAThread]
         static void Main()
         {
-            using (var game = new SpaceShoot())
+            using (var game = new SpaceShooter())
                 game.Run();
         }
     }

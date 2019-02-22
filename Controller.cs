@@ -5,17 +5,25 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MySecondMonoGame
 {
+    enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    }
+
     class Controller
     {
         public List<Asteroid> Asteroids = new List<Asteroid>();
         public double Timer = 2D;
         public double MaxTime = 2D;
         public int NextSpeed = 240;
-        public float TotalTime = 0f;
+        public float TotalTime;
 
-        public bool InGame = false;
+        public bool InGame;
 
-        public void ConUpdate(GameTime gameTime)
+        public void ControllerUpdate(GameTime gameTime)
         {
             if (InGame)
             {

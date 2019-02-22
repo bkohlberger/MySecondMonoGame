@@ -43,7 +43,8 @@
   <ItemGroup>
     <Compile Include="Asteroid.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="SpaceShoot.cs" />
+    <Compile Include="Projectile.cs" />
+    <Compile Include="SpaceShooter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Ship.cs" />
@@ -62,6 +63,8 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
     <None Include="Content\asteroid.xnb" />
+    <None Include="Content\blip.xnb" />
+    <None Include="Content\bullet.xnb" />
     <None Include="Content\ship.xnb" />
     <None Include="Content\space.xnb" />
     <None Include="Content\spaceFont.xnb" />
